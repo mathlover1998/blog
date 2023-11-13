@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'blog_app',
     'post',
     'account',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -79,6 +80,7 @@ TEMPLATES = [
             ],
         },
     },
+
 ]
 
 WSGI_APPLICATION = 'blog.wsgi.application'
@@ -145,3 +147,23 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#AWS configuration
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', default='')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', default='')
+
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME', default='')
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+AWS_S3_FILE_OVERWRITE = False
+
+STORAGES = {
+    #for media files
+    "default":{
+        "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
+    },
+    #for CSS and JS files
+    "staticfiles":{
+        "BACKEND": "storages.backends.s3boto3.S3StaticStorage",
+    }
+}
