@@ -1,0 +1,90 @@
+{% extends "shared/base.html" %}
+{% load static %}
+{% block heading_page_subtitle %}Update Profile{% endblock %}
+{% block heading_page_title %}Update Profile{% endblock %}
+{% block content %}
+
+<form method = 'POST' enctype="multipart/form-data">
+    {% csrf_token %}
+<div class="container-xl px-4 mt-4">
+
+    <hr class="mt-0 mb-4">
+    <div class="row">
+    <div class="col-xl-4">
+    <div class="card mb-4 mb-xl-0">
+    <div class="card-header">Profile Picture</div>
+    <div class="card-body text-center">
+    {% if current_user.profile_picture %}
+    <img class="img-account-profile rounded-circle mb-2" src="{{current_user.profile_picture.url}}" alt>
+    {% else %}
+    <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt>
+    {% endif %}
+    
+    
+    <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+    
+    <input type="file" value='Upload new image' name= 'image' accept="image/*">
+    </div>
+    </div>
+    </div>
+    <div class="col-xl-8">
+    
+    <div class="card mb-4">
+    <div class="card-header">Account Details</div>
+    <div class="card-body">
+    
+    <div class="mb-3">
+    <label class="small mb-1" for="inputUsername">Username (how your name will appear to other users on the site)</label>
+    <input class="form-control" id="inputUsername" type="text" placeholder="Enter your username" value="{{current_user.username}}" name = 'username'>
+    <div id="username-warning" style="color: red;"></div>
+    </div>
+    
+    <div class="row gx-3 mb-3">
+    
+    <div class="col-md-6">
+    <label class="small mb-1" for="inputFirstName">First name</label>
+    <input class="form-control" id="inputFirstName" type="text" placeholder="Enter your first name" value="{{current_user.first_name}}" name='first_name'>
+    </div>
+    
+    <div class="col-md-6">
+    <label class="small mb-1" for="inputLastName">Last name</label>
+    <input class="form-control" id="inputLastName" type="text" placeholder="Enter your last name" value="{{current_user.last_name}}" name='last_name'>
+    </div>
+    </div>
+    
+    <div class="row gx-3 mb-3">
+    
+    <div class="col-md-6">
+    <label class="small mb-1" for="inputOrgName">Organization name</label>
+    <input class="form-control" id="inputOrgName" type="text" placeholder="Enter your organization name" value="Start Bootstrap" disabled>
+    </div>
+    
+    <div class="col-md-6">
+    <label class="small mb-1" for="inputLocation">Location</label>
+    <input class="form-control" id="inputLocation" type="text" placeholder="Enter your location" value="San Francisco, CA" disabled>
+    </div>
+    </div>
+    
+    <div class="mb-3">
+    <label class="small mb-1" for="inputEmailAddress">Email address</label>
+    <input class="form-control" id="inputEmailAddress" type="email" placeholder="Enter your email address" value="{{current_user.email}}" name = 'email' disabled>
+    </div>
+    
+    <div class="row gx-3 mb-3">
+    
+    <div class="col-md-12">
+        <label class="small mb-1" for="inputBirthday">Bio</label>
+        <input class="form-control" id="inputBirthday" type="text" placeholder="Enter your birthday" value="{{current_user.bio}}" name='bio'>
+    </div>
+    
+    </div>
+    
+    <input class="btn btn-primary" type="submit" value='Save changes'>
+    
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+</form>
+{% endblock %}

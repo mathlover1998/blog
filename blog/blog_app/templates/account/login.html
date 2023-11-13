@@ -1,0 +1,33 @@
+{% extends "shared/base.html" %}
+{% load static %}
+{% block heading_page_subtitle %}Login{% endblock %}
+{% block heading_page_title %}Login to access to our world!{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+<form method="POST">
+    {% csrf_token %}
+    <h1 style = 'text-align:center;fone-size:18;'>Login Form</h1>
+    {% if messages %}
+    <ul class="messages" >
+        {% for message in messages %}
+            <li style = 'text-align:center;fone-size:12;color:red;list-style-type: none;' {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+      <div class="formcontainer">
+      <hr/>
+      <div class="container">
+        <label for="username"><strong>Username</strong></label>
+        <input type="text" placeholder="Enter Username" name="username" required>
+        <label for="password"><strong>Password</strong></label>
+        <input type="password" placeholder="Enter Password" name="password" required>
+      </div>
+      <input type="submit" value='Submit'>
+      <div class="container" style="background-color: #eee">
+        <label style="padding-left: 15px">
+        <input type="checkbox"  checked="checked" name="remember"> Remember me
+        </label>
+        <span class="psw"><a href="#"> Forgot password?</a></span>
+      </div>
+</form>
+{% endblock %}

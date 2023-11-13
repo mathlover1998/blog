@@ -1,0 +1,38 @@
+{% extends "shared/base.html" %}
+{% load static %}
+{% block heading_page_subtitle %}Register{% endblock %}
+{% block heading_page_title %}Register new account here!{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+
+<form method="POST" id='registration-form' action="{% url 'register' %}">
+    {% csrf_token %}
+    <h1 style = 'text-align:center;fone-size:18;'>Register Form</h1>
+    {% if messages %}
+    <ul class="messages" > 
+        {% for message in messages %}
+            <li style = 'text-align:center;font-size:12;color:red;list-style-type: none;' {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+      <div class="formcontainer">
+      <hr/>
+      <div class="container">
+        <label for="username"><strong>Username</strong></label>
+        <input type="text" id="id_username" placeholder="Enter Username" name="username" required>
+        <span class="alert-warning" style="color: red;"></span>
+        <label for="email"><strong>Email</strong></label>
+        <br>
+        <input type="email" placeholder="Enter Email" name="email" required 
+        style = 'width: 100%;padding: 16px 8px;margin: 8px 0;display: inline-block;border: 1px solid #ccc;box-sizing: border-box;'>
+    </div>
+    <div class="container">
+        <label for="password"><strong>Password</strong></label>
+        <input type="password" placeholder="Enter Password" name="password" required>
+        <label for="re_password"><strong>Confirm Password</strong></label>
+        <input type="password" placeholder="Confirm Password" name="re_password" required>
+      </div>
+      <input type="submit" value='Submit'>
+      
+</form>
+{% endblock %}
